@@ -1,6 +1,7 @@
 import XMonad
 
 import XMonad.Actions.PhysicalScreens
+import XMonad.Actions.MouseResize
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
@@ -14,11 +15,19 @@ import XMonad.Util.SpawnOnce
 import XMonad.Util.Ungrab
 
 import qualified XMonad.Layout.IndependentScreens as LIS
+import XMonad.Layout.Accordion
+import XMonad.Layout.LayoutModifier
+import XMonad.Layout.LimitWindows (limitWindows, increaseLimit, decreaseLimit)
 import XMonad.Layout.Magnifier
 import XMonad.Layout.NoBorders
 import XMonad.Layout.ThreeColumns
+import XMonad.Layout.ResizableTile
 import XMonad.Layout.Renamed
+import XMonad.Layout.Simplest
+import XMonad.Layout.ShowWName
 import XMonad.Layout.Spacing
+import XMonad.Layout.SubLayouts
+import XMonad.Layout.WindowNavigation
 
 import XMonad.Hooks.EwmhDesktops
 
@@ -33,6 +42,10 @@ myNormColor   = "#44475A"
 
 myFocusColor :: String      -- Border color of focused windows
 myFocusColor  = "#BD93F9"     
+
+myBorderWidth :: Dimension
+myBorderWidth = 1 
+
 
 main :: IO ()
 main = xmonad
@@ -89,15 +102,38 @@ myManageHook = composeAll
     , isDialog            --> doFloat
     ]
 
-myLayout = lessBorders Never $ tiled ||| Mirror tiled ||| Full ||| threeCol 
-  where
-    threeCol = renamed [Replace "ThreeCol"]
-        	$ magnifiercz' 1.3
-        	$ ThreeColMid nmaster delta ratio 
-    tiled    = Tall nmaster delta ratio
-    nmaster  = 1      -- Default number of windows in the master pane
-    ratio    = 1/2    -- Default proportion of screen occupied by master pane
-    delta    = 3/100  -- Percent of screen to increment by when resizing panes
+myLayout  = lessBorders Never $ myDefaultLayout
+            where
+              myDefaultLayout = withBorder myBorderWidth tall 
+                                ||| Main.magnify
+                                ||| threeCol
+                                ||| tallAccordion
+                                ||| Full
+
+tall     = renamed [Replace "tall"]
+           $ smartBorders
+           $ windowNavigation
+           $ subLayout [] (smartBorders Simplest)
+           $ limitWindows 12
+           $ ResizableTall 1 (3/100) (1/2) []
+magnify  = renamed [Replace "magnify"]
+           $ smartBorders
+           $ windowNavigation
+           $ subLayout [] (smartBorders Simplest)
+           $ magnifier
+           $ limitWindows 12
+           $ ResizableTall 1 (3/100) (1/2) []
+threeCol = renamed [Replace "ThreeCol"]
+           $ smartBorders
+           $ windowNavigation
+           $ subLayout [] (smartBorders Simplest)
+        	 $ magnifiercz' 1.3
+           $ limitWindows 12
+        	 $ ThreeColMid 1 (3/100) (1/2)
+tallAccordion  = renamed [Replace "tallAccordion"]
+           $ Accordion
+wideAccordion  = renamed [Replace "wideAccordion"]
+           $ Mirror Accordion
 
 myXmobarPP :: PP
 myXmobarPP = def
@@ -135,5 +171,5 @@ myWorkspaces =	[ "<fc=#f6f0ef><fn=3>\xf002</fn></fc>"	-- 
 		, "<fc=#179CDE><fn=3>\xf1d8</fn></fc>"	-- 
 		, "<fc=#f6f0ef><fn=3>\xf126</fn></fc>"	-- 
 		, "<fc=#808b96><fn=4>\xf1b6</fn></fc>"	-- 
-		, "<fc=#198dc2><fn=4>\xe531</fn></fc>"]	-- 
+		, "<fc=#198dc2><fn=4>\xf838</fn></fc>"]	-- 
 

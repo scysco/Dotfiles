@@ -52,6 +52,8 @@ return packer.startup(function(use)
   use 'kyazdani42/nvim-tree.lua'
   use "akinsho/bufferline.nvim"
   use "moll/vim-bbye"
+  use 'mg979/vim-visual-multi'
+  use 'edluffy/hologram.nvim'
 
   use 'nvim-lualine/lualine.nvim'
   use 'Mofiqul/dracula.nvim'

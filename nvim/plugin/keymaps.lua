@@ -22,8 +22,8 @@ keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
 -- Move text up and down
-keymap("n", "<C-Down>", ":m .+1<CR>==", opts)
-keymap("v", "<C-j>", ":m .+1<CR>==", opts)
-keymap("n", "<C-Up>", ":m .-2<CR>==", opts)
-keymap("v", "<C-k>", ":m .-2<CR>==", opts)
+keymap("n", "<A-Down>", ":m .+1<CR>==", opts)
+keymap("v", "<A-j>", ":m .+1<CR>==", opts)
+keymap("n", "<A-Up>", ":m .-2<CR>==", opts)
+keymap("v", "<A-k>", ":m .-2<CR>==", opts)
 

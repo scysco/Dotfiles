@@ -134,6 +134,11 @@ _G.packer_plugins = {
     path = "/home/scysco/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
   },
+  ["hologram.nvim"] = {
+    loaded = true,
+    path = "/home/scysco/.local/share/nvim/site/pack/packer/start/hologram.nvim",
+    url = "https://github.com/edluffy/hologram.nvim"
+  },
   ["impatient.nvim"] = {
     loaded = true,
     path = "/home/scysco/.local/share/nvim/site/pack/packer/start/impatient.nvim",
@@ -223,6 +228,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/scysco/.local/share/nvim/site/pack/packer/start/vim-bbye",
     url = "https://github.com/moll/vim-bbye"
+  },
+  ["vim-visual-multi"] = {
+    loaded = true,
+    path = "/home/scysco/.local/share/nvim/site/pack/packer/start/vim-visual-multi",
+    url = "https://github.com/mg979/vim-visual-multi"
   },
   ["which-key.nvim"] = {
     loaded = true,
