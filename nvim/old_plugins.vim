@@ -2,6 +2,7 @@ call plug#begin()
 Plug 'sheerun/vim-polyglot'
 
 Plug 'morhetz/gruvbox'
+
 Plug 'itchyny/lightline.vim'
 Plug 'shinchu/lightline-gruvbox.vim'
 
@@ -11,6 +12,10 @@ else
   Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
 endif
 
+Plug 'KarimElghamry/vim-auto-comment'
+
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
+
+

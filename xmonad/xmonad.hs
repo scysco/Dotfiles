@@ -1,5 +1,6 @@
 import XMonad
 
+import XMonad.Actions.PhysicalScreens
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
@@ -12,6 +13,7 @@ import XMonad.Util.Loggers
 import XMonad.Util.SpawnOnce
 import XMonad.Util.Ungrab
 
+import qualified XMonad.Layout.IndependentScreens as LIS
 import XMonad.Layout.Magnifier
 import XMonad.Layout.NoBorders
 import XMonad.Layout.ThreeColumns
@@ -24,27 +26,37 @@ myModMask :: KeyMask
 myModMask = mod4Mask        -- Sets modkey to super/windows key
 
 myTerminal :: String
-myTerminal = "urxvt"    -- Sets default terminal
+myTerminal = "kitty"    -- Sets default terminal
+
+myNormColor :: String       -- Border color of normal windows
+myNormColor   = "#44475A"
+
+myFocusColor :: String      -- Border color of focused windows
+myFocusColor  = "#BD93F9"     
 
 main :: IO ()
 main = xmonad
      . ewmhFullscreen
      . ewmh
-     . withEasySB (statusBarProp "xmobar ~/.config/xmonad/xmobarrc" (pure myXmobarPP)) defToggleStrutsKey
+     . withEasySB (statusBarProp "xmobar ~/.dotfiles/xmonad/xmobar.hs" (pure myXmobarPP)) defToggleStrutsKey
      $ myConfig
 
 myConfig = def
     { modMask = myModMask      -- Rebind Mod to the Super key
     , terminal = myTerminal
-    , layoutHook = spacingWithEdge 10 $ myLayout      -- Use custom layouts
+    , layoutHook = spacingRaw False (Border 0 10 10 10) True (Border 10 10 10 10) True $ myLayout      -- Use custom layouts
     , manageHook = myManageHook  -- Match on certain windows
     , startupHook = myStartupHook
     , workspaces = myWorkspaces
+    , normalBorderColor  = myNormColor
+    , focusedBorderColor = myFocusColor
     }
   `additionalKeysP`
     [ ("M-S-z", spawn "xscreensaver-command -lock")
     , ("M-S-=", unGrab *> spawn "scrot -s"        )
     , ("M-]"  , spawn "firefox"                   )
+    , ("M-<Return>", spawn "kitty")
+    , ("M-e", spawn "kitty -e ranger")
     -- Multimedia Keys
     , ("<XF86AudioMute>", spawn "amixer set Master toggle")
     , ("<XF86AudioLowerVolume>", spawn "amixer set Master 5%- unmute")
@@ -55,15 +67,21 @@ myConfig = def
 
 myStartupHook :: X ()
 myStartupHook = do
-          spawnOnce "nitrogen --restore"
-          spawnOnce "picom"
-          spawnOnce "sleep 2 && trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 255 --height 18"
-          spawnOnce "nm-applet"
-          spawnOnce "blueman-applet"
-          spawnOnce "gpick"
-          setWMName "LG3D"
+    spawnOnce "nitrogen --restore"
+    spawnOnce "picom"
+    spawnOnce "sleep 2 && trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 255 --height 18"
+    spawnOnce "nm-applet"
+    spawnOnce "blueman-applet"
+    spawnOnce "gpick"
+    spawnOnce "udiskie -A -s -f 'kitty -e ranger'"
+    setWMName "LG3D"
+    togglevga
 
-
+togglevga = do
+  screencount <- LIS.countScreens
+  if screencount > 1
+   then spawn "xrandr --output HDMI1 --off"
+   else spawn "xrandr --output HDMI1 --auto --right-of eDP1"
 
 myManageHook :: ManageHook
 myManageHook = composeAll
@@ -73,8 +91,7 @@ myManageHook = composeAll
 
 myLayout = lessBorders Never $ tiled ||| Mirror tiled ||| Full ||| threeCol 
   where
-    threeCol 
-			= renamed [Replace "ThreeCol"]
+    threeCol = renamed [Replace "ThreeCol"]
         	$ magnifiercz' 1.3
         	$ ThreeColMid nmaster delta ratio 
     tiled    = Tall nmaster delta ratio
@@ -85,12 +102,11 @@ myLayout = lessBorders Never $ tiled ||| Mirror tiled ||| Full ||| threeCol
 myXmobarPP :: PP
 myXmobarPP = def
     { ppSep             = magenta " • "
-    , ppTitleSanitize   = xmobarStrip
     , ppCurrent         = wrap " " "" . xmobarBorder "Top" "#8be9fd" 2
     , ppHidden          = white . wrap " " ""
     --, ppHiddenNoWindows = lowWhite . wrap " " ""
     , ppUrgent          = red . wrap (yellow "!") (yellow "!")
-    , ppOrder           = \[ws, l, _, wins] -> [ws, l, wins]
+    , ppOrder           = \[ws, l, win, _] -> [ws, l, win]
     , ppExtras          = [logTitles formatFocused formatUnfocused]
     }
   where
@@ -119,9 +135,5 @@ myWorkspaces =	[ "<fc=#f6f0ef><fn=3>\xf002</fn></fc>"	-- 
 		, "<fc=#179CDE><fn=3>\xf1d8</fn></fc>"	-- 
 		, "<fc=#f6f0ef><fn=3>\xf126</fn></fc>"	-- 
 		, "<fc=#808b96><fn=4>\xf1b6</fn></fc>"	-- 
-		, "<fc=#198dc2><fn=3>\xf7c0</fn></fc>"]	-- 
-
-
-
-
+		, "<fc=#198dc2><fn=4>\xe531</fn></fc>"]	-- 
 

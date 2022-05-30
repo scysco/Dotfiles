@@ -1,5 +1,6 @@
 filetype plugin indent on
 set clipboard=unnamedplus 
+set smartindent
 set cursorline
 set mouse=a
 set number relativenumber
@@ -8,7 +9,8 @@ set laststatus=2
 set showcmd
 set showmatch
 set sw=2
-set ts=2
+set tabstop=2 softtabstop=2
+set nowrap
 map <C-y> :w !xclip -sel c <CR><CR>
 
 syntax on
@@ -24,3 +26,4 @@ highlight Normal     ctermbg=NONE guibg=NONE
 
 let g:lightline = {}
 let g:lightline.colorscheme = 'gruvbox'
+

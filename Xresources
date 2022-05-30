@@ -44,4 +44,4 @@ urxvt*background: rgba:1870/1940/2070/c800
 *.color7:       #202328
 *.color15:      #dfdfdf
 
-
+Xcursor.theme: Nordzy-cursors
