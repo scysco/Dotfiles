@@ -56,7 +56,8 @@ return packer.startup(function(use)
   use 'edluffy/hologram.nvim'
 
   use 'nvim-lualine/lualine.nvim'
-  use 'Mofiqul/dracula.nvim'
+  -- use 'Mofiqul/dracula.nvim'
+  use 'https://gitlab.com/__tpb/monokai-pro.nvim'
 
   -- cmp plugins
   use "hrsh7th/nvim-cmp" -- The completion plugin

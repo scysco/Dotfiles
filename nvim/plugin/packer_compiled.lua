@@ -119,11 +119,6 @@ _G.packer_plugins = {
     path = "/home/scysco/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
-  ["dracula.nvim"] = {
-    loaded = true,
-    path = "/home/scysco/.local/share/nvim/site/pack/packer/start/dracula.nvim",
-    url = "https://github.com/Mofiqul/dracula.nvim"
-  },
   ["friendly-snippets"] = {
     loaded = true,
     path = "/home/scysco/.local/share/nvim/site/pack/packer/start/friendly-snippets",
@@ -148,6 +143,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/scysco/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
+  },
+  ["monokai-pro.nvim"] = {
+    loaded = true,
+    path = "/home/scysco/.local/share/nvim/site/pack/packer/start/monokai-pro.nvim",
+    url = "https://gitlab.com/__tpb/monokai-pro.nvim"
   },
   ["nvim-autopairs"] = {
     loaded = true,

@@ -166,7 +166,7 @@ myXmobarPP = def
 myWorkspaces =	[ "<fc=#f6f0ef><fn=3>\xf002</fn></fc>"	-- 
 		, "<fc=#008080><fn=3>\xf5fc</fn></fc>"	-- 
 		, "<fc=#f4d03f><fn=3>\xf5fd</fn></fc>"	-- 
-		, "<fc=#f6f0ef><fn=3>\xf120</fn></fc>"	-- 
+		, "<fc=#ebcb8b><fn=3>\xf02d</fn></fc>"	-- 
 		, "<fc=#1DB954><fn=4>\xf1bc</fn></fc>"	-- 
 		, "<fc=#179CDE><fn=3>\xf1d8</fn></fc>"	-- 
 		, "<fc=#f6f0ef><fn=3>\xf126</fn></fc>"	-- 
