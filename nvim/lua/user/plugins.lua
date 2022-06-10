@@ -46,31 +46,45 @@ return packer.startup(function(use)
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
   use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
   use 'lewis6991/impatient.nvim'
+  use 'tami5/sqlite.lua'
+
   -- My plugins here
   use "numToStr/Comment.nvim" -- Easily comment stuff
   use 'kyazdani42/nvim-web-devicons'
-  use 'kyazdani42/nvim-tree.lua'
   use "akinsho/bufferline.nvim"
   use "moll/vim-bbye"
   use 'mg979/vim-visual-multi'
-  use 'edluffy/hologram.nvim'
+  use 'kevinhwang91/rnvimr'
 
   use 'nvim-lualine/lualine.nvim'
-  -- use 'Mofiqul/dracula.nvim'
-  use 'https://gitlab.com/__tpb/monokai-pro.nvim'
+  use 'Mofiqul/dracula.nvim'
+  use 'marko-cerovac/material.nvim'
+  use 'folke/tokyonight.nvim'
+
+  use {
+    "rcarriga/nvim-notify",
+    event = "VimEnter",
+    config = function()
+      vim.notify = require "notify"
+    end,
+  }
 
   -- cmp plugins
-  use "hrsh7th/nvim-cmp" -- The completion plugin
+  use "hrsh7th/cmp-nvim-lsp"
   use "hrsh7th/cmp-buffer" -- buffer completions
   use "hrsh7th/cmp-path" -- path completions
   use "hrsh7th/cmp-cmdline" -- cmdline completions
-  use "saadparwaiz1/cmp_luasnip" -- snippet completions
-  use "hrsh7th/cmp-nvim-lsp"
+  use "hrsh7th/nvim-cmp" -- The completion plugin
   use "hrsh7th/cmp-nvim-lua"
+  use "hrsh7th/cmp-nvim-lsp-document-symbol"
 
   -- snippets
-  use "L3MON4D3/LuaSnip" --snippet engine
+  -- use "L3MON4D3/LuaSnip" --snippet engine
+  -- use "saadparwaiz1/cmp_luasnip" -- snippet completions
+  use 'hrsh7th/cmp-vsnip'
+  use 'hrsh7th/vim-vsnip'
   use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
+  use 'Neevash/awesome-flutter-snippets'
 
   -- LSP
   use "neovim/nvim-lspconfig" -- enable LSP
@@ -78,7 +92,9 @@ return packer.startup(function(use)
 
   -- Telescope
   use "nvim-telescope/telescope.nvim"
-  use 'nvim-telescope/telescope-media-files.nvim'
+  use 'nvim-telescope/telescope-fzy-native.nvim'
+  use "AckslD/nvim-neoclip.lua"
+  -- use 'nvim-telescope/telescope-media-files.nvim'
 
   -- Project
   use "ahmedkhalf/project.nvim"
@@ -99,6 +115,11 @@ return packer.startup(function(use)
 
   -- which key
   use "folke/which-key.nvim"
+
+  -- ToggleTerm
+  use 'akinsho/toggleterm.nvim'
+  -- Flutter
+  use 'akinsho/flutter-tools.nvim'
 
   if PACKER_BOOTSTRAP then
     require("packer").sync()

@@ -32,13 +32,23 @@ for _, sign in ipairs(signs) do
 end
 
 local config = {
-  --virtual_text = false,
+  virtual_text = false,
   update_in_insert = true,
-  underline = true,
+  underline = false,
   severity_sort = true,
 }
 
 vim.diagnostic.config(config)
+
+-- vim.lsp.handlers["textDocument/publishDiagnostics"] =
+--     vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+--         -- Disable underline, it's very annoying
+--         underline = false,
+--         -- Enable virtual text, override spacing to 4
+--         virtual_text = {spacing = 4},
+--         signs = true,
+--         update_in_insert = false
+--     })
 
 -- nvim-cmp supports additional completion capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()

@@ -27,3 +27,12 @@ keymap("v", "<A-j>", ":m .+1<CR>==", opts)
 keymap("n", "<A-Up>", ":m .-2<CR>==", opts)
 keymap("v", "<A-k>", ":m .-2<CR>==", opts)
 
+--Move easily to the end of the line
+keymap("i", "<S-Tab>", "<esc>A", opts)
+
+--Term
+keymap("n", "<C-\\>", ":ToggleTerm<CR>", opts)
+-- keymap("", "<Esc>", "<C-\><C-n>", opts)
+vim.cmd [[
+  tnoremap <Esc> <C-\><C-n>:ToggleTerm<CR>
+]]

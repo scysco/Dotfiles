@@ -26,7 +26,7 @@ local mappings = {
     "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{})<cr>",
     "Buffers",
   },
-  ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
+  ["e"] = { "<cmd>RnvimrToggle<cr>", "Explorer" },
   ["w"] = { "<cmd>w!<CR>", "Save" },
   ["q"] = { "<cmd>q!<CR>", "Quit" },
   ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
@@ -35,10 +35,19 @@ local mappings = {
     "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{})<cr>",
     "Find files",
   },
-  ["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
+  F = {
+    name = "Find Options",
+    d = {"<cmd>Telescope diagnostics bufnr=0<cr>", "Find Diagnostics"},
+    D = {"<cmd>Telescope diagnostics<cr>", "Find Global Diagnostics"},
+    r = {"<cmd>Telescope lsp_references<cr>", "Find References"},
+    t = {"<cmd>Telescope live_grep<cr>", "Find Text"},
+    w = {"<cmd>Telescope grep_string<cr>", "Find Word"},
+  },
+  ["p"] = { "<cmd>Telescope neoclip<cr>", "Paste from clipboard" },
   ["P"] = { "<cmd>Telescope projects<cr>", "Projects" },
   l = {
     name = "lsp",
+    d = { "<cmd>lua vim.diagnostic.open_float()<cr>", "Diagnostic Help" },
     f = { "<cmd>lua vim.lsp.buf.format()<cr>", "Format" },
     h = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "Signature Help" },
     k = { "<cmd>lua vim.lsp.buf.hover()<cr>", "Hover" },
@@ -63,7 +72,7 @@ local mappings = {
     C = { "<cmd>Telescope commands<cr>", "Commands" },
   },
   
-  t = {
+  T = {
     name = "Tools",
     p = {
       name = "Packer",
