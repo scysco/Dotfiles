@@ -1,0 +1,24 @@
+{
+  "React Function": {
+    "prefix": ["rfp"],
+    "body": [
+      "import PropTypes from 'prop-types';",
+      "",
+      "export const ${1:${TM_FILENAME_BASE}} = () => {",
+      "\treturn (",
+      "\t\t<>",
+      "\t\t\t${2:}",
+      "\t\t</>",
+      "\t)",
+      "}",
+      "",
+      "${1:${TM_FILENAME_BASE}}.propTypes = {",
+      "\t",
+      "}",
+      "",
+      "${1:${TM_FILENAME_BASE}}.defaultProps = {",
+      "\t",
+      "}"
+    ]
+  }
+}

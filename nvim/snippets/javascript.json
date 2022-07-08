@@ -1,0 +1,12 @@
+{
+  "Test Template":{
+    "prefix": ["tdesc"],
+    "body":[
+      "describe('test on ${1:${TM_FILENAME_BASE}}', () => {",
+      "\ttest('should ${2}}', ()=>{",
+      "\t\t${3}",
+      "\t});",
+      "});"
+    ]
+  }
+}

@@ -30,6 +30,8 @@ keymap("v", "<A-k>", ":m .-2<CR>==", opts)
 --Move easily to the end of the line
 keymap("i", "<S-Tab>", "<esc>A", opts)
 
+keymap("", "<F12>c", ":exe ':silent !google-chrome-stable %'<CR>", opts)
+
 --Term
 keymap("n", "<C-\\>", ":ToggleTerm<CR>", opts)
 -- keymap("", "<Esc>", "<C-\><C-n>", opts)

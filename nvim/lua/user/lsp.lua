@@ -1,4 +1,4 @@
-local status_ok, _ = pcall(require, "lspconfig")
+local status_ok, lspconfig = pcall(require, "lspconfig")
 if not status_ok then
   return
 end
@@ -8,17 +8,15 @@ if not installer_ok then
   return
 end
 
-local cmp_lsp_ok, cmp_lsp = pcall(require, "cmp_nvim_lsp")
-if not cmp_lsp_ok then
-  return
+-------------------
+
+lsp_installer.setup {
+  automatic_installation = true
+}
+
+for _, server in ipairs(lsp_installer.get_installed_servers()) do
+  lspconfig[server.name].setup {}
 end
-
-lsp_installer.on_server_ready(function(server)
-  local opts = {}
-
-  server:setup(opts)
-  vim.cmd([[ do User LspAttachBuffers ]])
-end)
 
 local signs = {
   { name = "DiagnosticSignError", text = "" },
@@ -39,17 +37,3 @@ local config = {
 }
 
 vim.diagnostic.config(config)
-
--- vim.lsp.handlers["textDocument/publishDiagnostics"] =
---     vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
---         -- Disable underline, it's very annoying
---         underline = false,
---         -- Enable virtual text, override spacing to 4
---         virtual_text = {spacing = 4},
---         signs = true,
---         update_in_insert = false
---     })
-
--- nvim-cmp supports additional completion capabilities
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = cmp_lsp.update_capabilities(capabilities)

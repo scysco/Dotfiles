@@ -86,10 +86,15 @@ return packer.startup(function(use)
   use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
   use 'Neevash/awesome-flutter-snippets'
 
+  -- use 'dsznajder/vscode-es7-javascript-react-snippets'
+  use {'dsznajder/vscode-es7-javascript-react-snippets',
+    run = 'yarn install --frozen-lockfile && yarn compile'
+  }
   -- LSP
   use "neovim/nvim-lspconfig" -- enable LSP
   use "williamboman/nvim-lsp-installer" -- simple to use language server nvim-lsp-installer
-
+  use 'jose-elias-alvarez/null-ls.nvim'
+  -- use 'MunifTanjim/eslint.nvim'
   -- Telescope
   use "nvim-telescope/telescope.nvim"
   use 'nvim-telescope/telescope-fzy-native.nvim'
@@ -109,6 +114,7 @@ return packer.startup(function(use)
   }
   use "p00f/nvim-ts-rainbow"
   use 'JoosepAlviste/nvim-ts-context-commentstring'
+  use 'windwp/nvim-ts-autotag'
 
   -- Git
   use 'lewis6991/gitsigns.nvim'
@@ -120,7 +126,8 @@ return packer.startup(function(use)
   use 'akinsho/toggleterm.nvim'
   -- Flutter
   use 'akinsho/flutter-tools.nvim'
-
+  -- Debug
+  use 'mfussenegger/nvim-dap'
   if PACKER_BOOTSTRAP then
     require("packer").sync()
   end

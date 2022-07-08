@@ -85,7 +85,7 @@ myStartupHook = do
     spawnOnce "sleep 2 && trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 255 --height 18"
     spawnOnce "nm-applet"
     spawnOnce "blueman-applet"
-    spawnOnce "gpick"
+--    spawnOnce "gpick"
     spawnOnce "udiskie -A -s -f 'kitty -e ranger'"
     setWMName "LG3D"
     togglevga
@@ -93,13 +93,32 @@ myStartupHook = do
 togglevga = do
   screencount <- LIS.countScreens
   if screencount > 1
-   then spawn "xrandr --output HDMI1 --off"
-   else spawn "xrandr --output HDMI1 --auto --right-of eDP1"
+   then spawn "xrandr --output HDMI-1 --off"
+   else spawn "xrandr --output HDMI-1 --auto --right-of eDP-1"
 
 myManageHook :: ManageHook
 myManageHook = composeAll
-    [ className =? "Gimp" --> doFloat
-    , isDialog            --> doFloat
+    [ className =? "confirm"         --> doFloat
+    , className =? "file_progress"   --> doFloat
+    , className =? "dialog"          --> doFloat
+    , className =? "download"        --> doFloat
+    , className =? "error"           --> doFloat
+    , className =? "notification"    --> doFloat
+    , className =? "splash"          --> doFloat
+    , className =? "toolbar"         --> doFloat
+    , (className =? "firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
+    --, className =? "Gimp"            --> doFloat
+    , className =? "firefox"   --> doShift ( myWorkspaces !! 0 )
+    , className =? "Brave-browser"   --> doShift ( myWorkspaces !! 0 )
+    , className =? "Google-chrome"   --> doShift ( myWorkspaces !! 0 )
+    , className =? "MongoDB Compass" --> doShift ( myWorkspaces !! 2 )
+    , className =? "Postman" --> doShift ( myWorkspaces !! 2 )
+    , className =? "notion-app"      --> doShift ( myWorkspaces !! 3 )
+    , className =? "Spotify" --> doShift ( myWorkspaces !! 4 )
+    , className =? "TelegramDesktop" --> doShift ( myWorkspaces !! 5 )
+    -- , className =? "mpv"             --> doShift ( myWorkspaces !! 7 )
+    -- , className =? "Gimp"            --> doShift ( myWorkspaces !! 8 )
+    -- , className =? "VirtualBox Manager" --> doShift  ( myWorkspaces !! 4 )
     ]
 
 myLayout  = lessBorders Never $ myDefaultLayout
