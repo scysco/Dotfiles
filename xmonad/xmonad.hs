@@ -106,6 +106,7 @@ myManageHook = composeAll
     , className =? "notification"    --> doFloat
     , className =? "splash"          --> doFloat
     , className =? "toolbar"         --> doFloat
+    , className =? "Pavucontrol"     --> doFloat
     , (className =? "firefox" <&&> resource =? "Dialog") --> doFloat  -- Float Firefox Dialog
     --, className =? "Gimp"            --> doFloat
     , className =? "firefox"   --> doShift ( myWorkspaces !! 0 )

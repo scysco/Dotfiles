@@ -15,7 +15,7 @@ Config	{ font = "xft:Ubuntu:weight=bold:pixelsize=15:antialias=true:hinting=true
 			, "-n", "#81a1c1"
 		] 10
 		, Run Volume "default" "Master" 
-		["--template"     ,"<status> <fc=#88c0d0><volume>%</fc>"
+		["--template"       ,"<status> <fc=#88c0d0><volume>%</fc>"
 		, "--"
 			, "-C"            ,"green"
 			, "-c"            ,"red"
@@ -56,5 +56,5 @@ Config	{ font = "xft:Ubuntu:weight=bold:pixelsize=15:antialias=true:hinting=true
 		]
 		, sepChar  = "%"
 		, alignSep = "}{"
-		, template = "%XMonadLog% }{ %default:Master% | %bright% | %cpu%   %memory% | %date% | %battery% %trayerpad% "
+		, template = "%XMonadLog% }{ <action=`pavucontrol`>%default:Master%</action> | %bright% | %cpu%   %memory% | %date% | %battery% %trayerpad% "
 }
